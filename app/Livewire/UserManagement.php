@@ -79,7 +79,7 @@ class UserManagement extends Component
 
         $this->resetForm();
         $this->showModal = false;
-        session()->flash('message', 'User saved successfully!');
+        session()->flash('message', $this->isEditing ? 'User updated successfully.' : 'User created successfully.');
     }
 
     public function delete($id)

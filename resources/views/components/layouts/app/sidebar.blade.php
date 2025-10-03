@@ -12,12 +12,22 @@
             </a>
 
             <flux:navlist variant="outline">
+                
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                 </flux:navlist.group>
-                <flux:navlist.group :heading="__('User Management')" class="grid">
-                    <flux:navlist.item icon="users" :href="route('users.index')" :current="request()->routeIs('users.index')" wire:navigate>{{ __('Manage Users') }}</flux:navlist.item>
-                </flux:navlist.group>
+
+                @can('user.view')
+                    <flux:navlist.group :heading="__('User Management')" class="grid">
+                        <flux:navlist.item icon="users" :href="route('users.index')" :current="request()->routeIs('users.index')" wire:navigate>{{ __('Manage Users') }}</flux:navlist.item>
+                    </flux:navlist.group>
+                @endcan
+                
+                @can('role.view')
+                    <flux:navlist.group :heading="__('Role Management')" class="grid">
+                        <flux:navlist.item icon="shield-check" :href="route('roles.index')" :current="request()->routeIs('roles.index')" wire:navigate>{{ __('Manage Roles') }}</flux:navlist.item>
+                    </flux:navlist.group>
+                @endcan
             </flux:navlist>
 
             <flux:spacer />

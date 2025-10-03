@@ -39,6 +39,33 @@ class RoleManagement extends Component
         $this->showModal = true;
     }
 
+    public function save()
+    {
+        if ($this->isEditing) {
+            $this->authorize('role.edit');
+            $this->rules['name'] = 'required|string|max:255|unique:roles,name,' . $this->roleId;
+        } else {
+            $this->authorize('role.create');
+        }
+
+        $this->validate();
+
+        if ($this->isEditing) {
+            $role = Role::findOrFail($this->roleId);
+            $role->update(['name' => $this->name]);
+        } else {
+            $role = Role::create(['name' => $this->name]);
+        }
+
+        $role->syncPermissions($this->selectedPermissions);
+
+        $this->resetForm();
+        $this->showModal = false;
+
+        session()->flash('message', $this->isEditing ? 'Role updated successfully.' : 'Role created successfully.');
+        
+    }
+
     public function resetForm()
     {
         $this->roleId = null;
