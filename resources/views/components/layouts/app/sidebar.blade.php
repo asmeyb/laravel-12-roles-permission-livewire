@@ -35,6 +35,12 @@
                     </flux:navlist.group>
                 @endcan
 
+                @can('brand.view')
+                    <flux:navlist.group :heading="__('Brand Management')" class="grid">
+                        <flux:navlist.item icon="home" :href="route('brands.index')" :current="request()->routeIs('brands.index')" wire:navigate>{{ __('Manage Brands') }}</flux:navlist.item>
+                    </flux:navlist.group>
+                @endcan
+
             </flux:navlist>
 
             <flux:spacer />

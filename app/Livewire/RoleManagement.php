@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
+
 class RoleManagement extends Component
 {
     use WithPagination;
@@ -82,13 +83,13 @@ class RoleManagement extends Component
     }
 
     public function render()
-    {
-        $this->authorize('role.view');
-        return view('livewire.role-management', [
-            'roles' => Role::withCount('users')->paginate(10),
-            'permissions' => Permission::all()->groupBy(function($permission) {
-                return explode('.', $permission->name)[0]; // Group by the first part of the permission name
-            }),
-        ]);
-    }
+{
+    $this->authorize('role.view');
+    return view('livewire.role-management', [
+        'roles' => Role::withCount('users')->paginate(10),
+        'permissions' => Permission::all()->groupBy(function($permission) {
+            return explode('.', $permission->name)[0];
+        }),
+    ]);
+}
 }
