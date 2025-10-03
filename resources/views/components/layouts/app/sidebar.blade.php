@@ -28,6 +28,13 @@
                         <flux:navlist.item icon="shield-check" :href="route('roles.index')" :current="request()->routeIs('roles.index')" wire:navigate>{{ __('Manage Roles') }}</flux:navlist.item>
                     </flux:navlist.group>
                 @endcan
+
+                @can('car.view')
+                    <flux:navlist.group :heading="__('Car Management')" class="grid">
+                        <flux:navlist.item icon="home" :href="route('cars.index')" :current="request()->routeIs('cars.index')" wire:navigate>{{ __('Manage Cars') }}</flux:navlist.item>
+                    </flux:navlist.group>
+                @endcan
+
             </flux:navlist>
 
             <flux:spacer />
