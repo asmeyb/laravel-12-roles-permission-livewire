@@ -32,12 +32,12 @@
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                 @foreach($users as $user)
-                    <tr>
+                    <tr wire:key="user-{{ $user->id }}">
                         <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">{{ $user->name }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">{{ $user->email }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             @foreach($user->roles as $role)
-                                <span
+                                <span wire:key="user-{{ $user->id }}"
                                     class="inline-flex px-2 py-1 text-xs bg-blue-100 dark:bg-blue-700 text-blue-800 dark:text-white rounded-full">
                                     {{ $role->name }}
                                 </span>
